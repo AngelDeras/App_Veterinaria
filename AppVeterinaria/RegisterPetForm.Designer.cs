@@ -105,9 +105,9 @@
             lblWeight.Font = new Font("Segoe UI", 9F);
             lblWeight.Location = new Point(6, 107);
             lblWeight.Name = "lblWeight";
-            lblWeight.Size = new Size(32, 15);
+            lblWeight.Size = new Size(54, 15);
             lblWeight.TabIndex = 4;
-            lblWeight.Text = "Peso";
+            lblWeight.Text = "Peso (gr)";
             // 
             // lblAge
             // 

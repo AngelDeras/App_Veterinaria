@@ -14,6 +14,7 @@ namespace AppVeterinaria
         public int Age { get; set; }
         public double Weight { get; set; }
         public string SpecificProperty { get; set; }
+        public decimal Total { get; set; }
 
         // Abstract methods
         public abstract decimal SterilizationCost();

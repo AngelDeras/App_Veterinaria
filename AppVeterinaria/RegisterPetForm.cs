@@ -14,7 +14,7 @@ namespace AppVeterinaria
             FillCmb();
         }
 
-    
+
 
         private void FillCmb()
         {
@@ -80,26 +80,41 @@ namespace AppVeterinaria
                     wtfPetProperty = "Raza"; break;
                 case "Gato":
                     wtfPetProperty = "Color"; break;
-                default: 
+                default:
                     wtfPetProperty = "Tipo"; break;
             }
 
-            string LaOrElXD = wtfPetProperty == "Raza" ? "La" : "El";
+            string isLaOrEl = wtfPetProperty == "Raza" ? "La" : "El";
             string petType = animal.PetType.ToLower();
+            string yearPluralFormatter = animal.Age == 1 ? "año" : "años";
 
             lsbTicket.Items.Clear();
             lsbTicket.Items.Add("TICKET");
-            lsbTicket.Items.Add($"El nombre del {petType} es {animal.Name}");
-            lsbTicket.Items.Add($"La edad del {petType} es: {animal.Age}");
-            lsbTicket.Items.Add($"El peso es de: {animal.Weight}");
-            lsbTicket.Items.Add($"{LaOrElXD} {wtfPetProperty.ToLower()} del {petType} es: {animal.SpecificProperty}");
+            lsbTicket.Items.Add($"El nombre del {petType} es: {animal.Name}");
+            lsbTicket.Items.Add($"La edad del {petType} es de {animal.Age} {yearPluralFormatter}");
+            lsbTicket.Items.Add($"El peso es de: {animal.Weight} gr");
+            lsbTicket.Items.Add($"{isLaOrEl} {wtfPetProperty.ToLower()} del {petType} es: {animal.SpecificProperty}");
+
+            decimal total = 0;
 
             if (ckbConsultation.Checked)
-                lsbTicket.Items.Add($"Costo consulta: {animal.ConsultationCost().ToString("C2")}");
+            {
+                total += animal.ConsultationCost();
+                lsbTicket.Items.Add($"Costo consulta: {animal.ConsultationCost():C2}");
+            }
             if (ckbVaccination.Checked)
-                lsbTicket.Items.Add($"Costo vacunacion: {animal.VaccinationCost().ToString("C2")}");
+            {
+                total += animal.VaccinationCost();
+                lsbTicket.Items.Add($"Costo vacunacion: {animal.VaccinationCost():C2}");
+            }
             if (ckbSterilization.Checked)
-                lsbTicket.Items.Add($"Costo esterilizacion: {animal.SterilizationCost().ToString("C2")}");
+            {
+                total += animal.SterilizationCost();
+                lsbTicket.Items.Add($"Costo esterilizacion: {animal.SterilizationCost():C2}");
+            }
+
+            animal.Total = total;
+            lsbTicket.Items.Add($"El total es: {animal.Total:C2}");
         }
 
         private void cmbPetType_SelectedIndexChanged(object sender, EventArgs e)
