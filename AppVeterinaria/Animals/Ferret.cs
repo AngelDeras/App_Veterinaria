@@ -26,7 +26,7 @@ namespace AppVeterinaria.Animals
 
         public override decimal SterilizationCost()
         {
-            return (decimal)(Weight / 0.05);
+            return (decimal)(Weight * 0.05);
         }
 
         public override decimal VaccinationCost()

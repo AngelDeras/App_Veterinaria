@@ -40,12 +40,15 @@
             groupBox1 = new GroupBox();
             cmbPetProperties = new ComboBox();
             lblPetProperty = new Label();
-            btnRegister = new Button();
-            dgvAnimals = new DataGridView();
             btnPrintTicket = new Button();
+            gbServicios = new GroupBox();
+            ckbConsultation = new CheckBox();
+            ckbVaccination = new CheckBox();
+            ckbSterilization = new CheckBox();
+            lsbTicket = new ListBox();
             gbGeneralData.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
+            gbServicios.SuspendLayout();
             SuspendLayout();
             // 
             // gbGeneralData
@@ -174,50 +177,85 @@
             lblPetProperty.TabIndex = 6;
             lblPetProperty.Text = "...";
             // 
-            // btnRegister
-            // 
-            btnRegister.BackColor = SystemColors.MenuHighlight;
-            btnRegister.FlatStyle = FlatStyle.Flat;
-            btnRegister.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnRegister.ForeColor = SystemColors.Control;
-            btnRegister.Location = new Point(12, 229);
-            btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(106, 43);
-            btnRegister.TabIndex = 8;
-            btnRegister.Text = "Registrar";
-            btnRegister.UseVisualStyleBackColor = false;
-            btnRegister.Click += btnRegister_Click;
-            // 
-            // dgvAnimals
-            // 
-            dgvAnimals.BackgroundColor = Color.LightSteelBlue;
-            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAnimals.Location = new Point(396, 12);
-            dgvAnimals.Name = "dgvAnimals";
-            dgvAnimals.Size = new Size(483, 211);
-            dgvAnimals.TabIndex = 9;
-            // 
             // btnPrintTicket
             // 
-            btnPrintTicket.BackColor = SystemColors.GradientActiveCaption;
+            btnPrintTicket.BackColor = SystemColors.MenuHighlight;
             btnPrintTicket.FlatStyle = FlatStyle.Flat;
-            btnPrintTicket.Location = new Point(396, 229);
+            btnPrintTicket.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnPrintTicket.ForeColor = SystemColors.Control;
+            btnPrintTicket.Location = new Point(12, 229);
             btnPrintTicket.Name = "btnPrintTicket";
-            btnPrintTicket.Size = new Size(109, 26);
-            btnPrintTicket.TabIndex = 10;
+            btnPrintTicket.Size = new Size(106, 43);
+            btnPrintTicket.TabIndex = 8;
             btnPrintTicket.Text = "Imprimir ticket";
             btnPrintTicket.UseVisualStyleBackColor = false;
             btnPrintTicket.Click += btnPrintTicket_Click;
+            // 
+            // gbServicios
+            // 
+            gbServicios.BackColor = SystemColors.Info;
+            gbServicios.Controls.Add(ckbConsultation);
+            gbServicios.Controls.Add(ckbVaccination);
+            gbServicios.Controls.Add(ckbSterilization);
+            gbServicios.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            gbServicios.Location = new Point(204, 96);
+            gbServicios.Name = "gbServicios";
+            gbServicios.Size = new Size(186, 127);
+            gbServicios.TabIndex = 8;
+            gbServicios.TabStop = false;
+            gbServicios.Text = "Servicios";
+            // 
+            // ckbConsultation
+            // 
+            ckbConsultation.AutoSize = true;
+            ckbConsultation.Font = new Font("Segoe UI", 9F);
+            ckbConsultation.Location = new Point(5, 63);
+            ckbConsultation.Name = "ckbConsultation";
+            ckbConsultation.Size = new Size(73, 19);
+            ckbConsultation.TabIndex = 13;
+            ckbConsultation.Text = "Consulta";
+            ckbConsultation.UseVisualStyleBackColor = true;
+            // 
+            // ckbVaccination
+            // 
+            ckbVaccination.AutoSize = true;
+            ckbVaccination.Font = new Font("Segoe UI", 9F);
+            ckbVaccination.Location = new Point(6, 41);
+            ckbVaccination.Name = "ckbVaccination";
+            ckbVaccination.Size = new Size(87, 19);
+            ckbVaccination.TabIndex = 12;
+            ckbVaccination.Text = "Vacunacion";
+            ckbVaccination.UseVisualStyleBackColor = true;
+            // 
+            // ckbSterilization
+            // 
+            ckbSterilization.AutoSize = true;
+            ckbSterilization.Font = new Font("Segoe UI", 9F);
+            ckbSterilization.Location = new Point(6, 19);
+            ckbSterilization.Name = "ckbSterilization";
+            ckbSterilization.Size = new Size(94, 19);
+            ckbSterilization.TabIndex = 11;
+            ckbSterilization.Text = "Esterilizacion";
+            ckbSterilization.UseVisualStyleBackColor = true;
+            // 
+            // lsbTicket
+            // 
+            lsbTicket.FormattingEnabled = true;
+            lsbTicket.ItemHeight = 15;
+            lsbTicket.Location = new Point(396, 12);
+            lsbTicket.Name = "lsbTicket";
+            lsbTicket.Size = new Size(267, 259);
+            lsbTicket.TabIndex = 9;
             // 
             // RegisterPetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
-            ClientSize = new Size(891, 284);
+            ClientSize = new Size(675, 284);
+            Controls.Add(lsbTicket);
+            Controls.Add(gbServicios);
             Controls.Add(btnPrintTicket);
-            Controls.Add(dgvAnimals);
-            Controls.Add(btnRegister);
             Controls.Add(groupBox1);
             Controls.Add(gbGeneralData);
             Name = "RegisterPetForm";
@@ -226,7 +264,8 @@
             gbGeneralData.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
+            gbServicios.ResumeLayout(false);
+            gbServicios.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -244,8 +283,11 @@
         private GroupBox groupBox1;
         private ComboBox cmbPetProperties;
         private Label lblPetProperty;
-        private Button btnRegister;
-        private DataGridView dgvAnimals;
         private Button btnPrintTicket;
+        private GroupBox gbServicios;
+        private CheckBox ckbSterilization;
+        private CheckBox ckbVaccination;
+        private ListBox lsbTicket;
+        private CheckBox ckbConsultation;
     }
 }

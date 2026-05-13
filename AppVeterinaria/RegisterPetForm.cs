@@ -8,43 +8,13 @@ namespace AppVeterinaria
         public RegisterPetForm()
         {
             InitializeComponent();
-            SetupDgv();
 
             // Setup and fill pet property combo box
             cmbPetType.SelectedIndex = 0;
             FillCmb();
         }
 
-        private void SetupDgv()
-        {
-            dgvAnimals.ColumnCount = 8;
-            dgvAnimals.Columns[0].Name = "Nombre";
-            dgvAnimals.Columns[1].Name = "Edad";
-            dgvAnimals.Columns[2].Name = "Peso";
-            dgvAnimals.Columns[3].Name = "Tipo mascota";
-            dgvAnimals.Columns[4].Name = "Propiedad especifica";
-            dgvAnimals.Columns[5].Name = "Costo esterilizacion";
-            dgvAnimals.Columns[6].Name = "Costo vacunacion";
-            dgvAnimals.Columns[7].Name = "Costo cita";
-        }
-
-        private void FillDgv()
-        {
-            dgvAnimals.Rows.Clear();
-            foreach (Animal animal in animals)
-            {
-                dgvAnimals.Rows.Add(
-                    animal.Name,
-                    animal.Age,
-                    animal.Weight,
-                    animal.PetType,
-                    animal.SpecificProperty,
-                    animal.SterilizationCost().ToString("C2"),
-                    animal.VaccinationCost().ToString("C2"),
-                    animal.ConsultationCost().ToString("C2")
-                    );
-            }
-        }
+    
 
         private void FillCmb()
         {
@@ -78,40 +48,63 @@ namespace AppVeterinaria
             }
         }
 
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void btnPrintTicket_Click(object sender, EventArgs e)
         {
+            Animal? animal = null;
             switch (cmbPetType.Text)
             {
                 case "Perro":
-                    Animal dog = new Dog(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
-                    animals.Add(dog);
+                    animal = new Dog(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
+                    animals.Add(animal);
                     break;
                 case "Gato":
-                    Animal cat = new Cat(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
-                    animals.Add(cat);
+                    animal = new Cat(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
+                    animals.Add(animal);
                     break;
                 case "Huron":
-                    Animal ferret = new Ferret(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
-                    animals.Add(ferret);
+                    animal = new Ferret(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
+                    animals.Add(animal);
                     break;
                 case "Hamster":
-                    Animal hamster = new Hamster(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
-                    animals.Add(hamster);
+                    animal = new Hamster(txtName.Text, int.Parse(txtAge.Text), double.Parse(txtWeight.Text), cmbPetProperties.Text);
+                    animals.Add(animal);
                     break;
                 default: throw new Exception("Tipo de mascota no encontrada.");
             }
-            FillDgv();
+
+            string wtfPetProperty;
+
+            switch (animal.PetType)
+            {
+                case "Perro":
+                    wtfPetProperty = "Raza"; break;
+                case "Gato":
+                    wtfPetProperty = "Color"; break;
+                default: 
+                    wtfPetProperty = "Tipo"; break;
+            }
+
+            string LaOrElXD = wtfPetProperty == "Raza" ? "La" : "El";
+            string petType = animal.PetType.ToLower();
+
+            lsbTicket.Items.Clear();
+            lsbTicket.Items.Add("TICKET");
+            lsbTicket.Items.Add($"El nombre del {petType} es {animal.Name}");
+            lsbTicket.Items.Add($"La edad del {petType} es: {animal.Age}");
+            lsbTicket.Items.Add($"El peso es de: {animal.Weight}");
+            lsbTicket.Items.Add($"{LaOrElXD} {wtfPetProperty.ToLower()} del {petType} es: {animal.SpecificProperty}");
+
+            if (ckbConsultation.Checked)
+                lsbTicket.Items.Add($"Costo consulta: {animal.ConsultationCost().ToString("C2")}");
+            if (ckbVaccination.Checked)
+                lsbTicket.Items.Add($"Costo vacunacion: {animal.VaccinationCost().ToString("C2")}");
+            if (ckbSterilization.Checked)
+                lsbTicket.Items.Add($"Costo esterilizacion: {animal.SterilizationCost().ToString("C2")}");
         }
 
         private void cmbPetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillCmb();
-        }
-
-        private void btnPrintTicket_Click(object sender, EventArgs e)
-        {
-            Ticket ticket = new Ticket();
-            ticket.Show();
         }
     }
 }
